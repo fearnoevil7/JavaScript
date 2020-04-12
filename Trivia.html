@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src=""></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    function setup_game(){
+        $(document).ready(function(){
+            var game;
+            $.get("https://opentdb.com/api.php?amount=10&type=multiple", function displayGame(data){ [9,8,7,6]
+                var answerkey = [];
+                for(var i = 0; i < data['results'].length; i++){
+                    choices = [];
+                    document.getElementById("questionset").innerHTML += "<h6 class = 'question'>" + data['results'][i]['question'] + "<h6>";
+                    choices.push(data['results'][i]['correct_answer']);
+                    answerkey.push(data['results'][i]['correct_answer']);
+                    for(var x = 0; x < data['results'][i]['incorrect_answers'].length; x++){
+                        choices.push(data['results'][i]['incorrect_answers'][x])
+                    }
+                    choices.sort(function(a, b){return 0.5 - Math.random()});
+                    for (var z = 0; z < choices.length; z++){
+                        document.getElementById("questionset").innerHTML += "<input type = 'radio' name = 'answer" + i +"'>" + choices[z] + "<br>"
+                    }
+                }
+                console.log("answer key", answerkey)
+                console.log("answers", choices);
+            });
+        });
+    }
+    </script>
+    <h1>Trivia</h1>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <button type="button" class="btn btn-warning" id="press" onclick="setup_game()">Warning</button>
+        <h6 id="trivia"></h6>
+        <p id="choice1"></p>
+        <p id="choice2"></p>
+        <p id="choice3"></p>
+        <p id="choice4"></p>
+        <div id="questionset"></div>
+        <button type="button" class="btn btn-warning" id="press" onclick="reveal()">Submit</button>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+</html>
